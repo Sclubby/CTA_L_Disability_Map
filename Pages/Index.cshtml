@@ -1,0 +1,27 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">CTA Database Website</h1>
+</div>
+
+<table class="table">
+    <thread>
+        <tr>
+            <th>Station_ID</th>
+            <th>Station_Name</th>
+        </tr>
+    </thread>
+    <tbody>
+        @foreach (var station in Model.Stations)
+        {
+            <tr>
+                <td>@station.Station_ID</td>
+                <td>@station.Station_Name</td>
+            </tr>
+        }
+    </tbody>
+</table>
