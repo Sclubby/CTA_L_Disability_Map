@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
 namespace CTA_Database_Website.Models
 {

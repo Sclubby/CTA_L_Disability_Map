@@ -9,7 +9,7 @@
         public string Stop_Name { get; set; }
         public string Direction { get; set; }
         public int ADA { get; set; }
-        public double Lat { get; set; }
-        public double lon { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
     }
 }

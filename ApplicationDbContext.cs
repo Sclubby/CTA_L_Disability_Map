@@ -16,6 +16,8 @@
         public DbSet<StopDetail> StopDetails { get; set; }
         public DbSet<Ridership> Riderships { get; set; }
 
+        public DbSet<StopStationCombined> StatesCombined { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Ridership>(entity =>

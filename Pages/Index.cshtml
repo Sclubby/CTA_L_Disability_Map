@@ -4,24 +4,31 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">CTA Database Website</h1>
-</div>
+ <div class="text-center">
+     <h1 class="display-4">CTA Database Website</h1>
+ </div>
 
-<table class="table">
-    <thread>
-        <tr>
-            <th>Station_ID</th>
-            <th>Station_Name</th>
-        </tr>
-    </thread>
-    <tbody>
-        @foreach (var station in Model.Stations)
-        {
-            <tr>
-                <td>@station.Station_ID</td>
-                <td>@station.Station_Name</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/map.css" />
+
+    <!-- Reference bundled file -->
+    <script src="~/js/bundle.js" type="module"></script>
+</head>
+
+<body>
+    <h3>My Google Maps Demo</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+
+    <!-- prettier-ignore -->
+    <script>
+        //Get the X, Y, and Label values from Razor syntax to JavaScript arrays
+        var xValues = @Html.Raw(Json.Serialize(Model.CombinedTable.Select(p => p.lat)));
+        var yValues = @Html.Raw(Json.Serialize(Model.CombinedTable.Select(p => p.lon)));
+        var names = @Html.Raw(Json.Serialize(Model.CombinedTable.Select(p => p.Station_Name))); 
+
+        (g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })
+            ({ key: "AIzaSyDLjUflujPTU3XAh3gbb4FtNkl9WvnOr_g", v: "weekly" });
+        
+ </script>
+</body>
