@@ -4,10 +4,6 @@
     ViewData["Title"] = "Home page";
 }
 
- <div class="text-center">
-     <h1 class="display-4">'L' Disability Map</h1>
- </div>
-
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/map.css" />
 
@@ -27,9 +23,16 @@
             <option value="Brown">Brown Line</option>
         </select>
     </div>
+    <div id="type-selector-control" class="map-control">
+        <select id="type-selector" class="selector-control">
+            <option value="All">Both</option>
+            <option value="1">ADA</option>
+            <option value="0">non-ADA</option>
+        </select>
+    </div>
     <!--The div element for the map -->
     <div id="map"></div>
-
+    <h4> Click on Icon for station Name </h4>
     <!-- prettier-ignore -->
     <script>
         var lats = @Html.Raw(Json.Serialize(Model.CombinedTable.Select(p => p.lat)));

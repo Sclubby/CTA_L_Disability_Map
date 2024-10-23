@@ -12,7 +12,11 @@ async function initMap() {
         zoom: 14,
         center: { lat: 41.8781, lng: -87.6298 }, //centered in chicago
         mapId: "1223296c9e0b184c", //adds style from style cloud
-        disableDefaultUI: true,  //disables default buttons
+         disableDefaultUI: true,  //disables default buttons
+         restriction: {
+             latLngBounds: { north: 42.1, south: 41.7, west: -87.9, east: -87.5 },
+             strictBounds: false,
+         },
         maxZoom: 16,
         minZoom: 10
     });
@@ -27,7 +31,20 @@ async function initMap() {
             const x = markers.pop();
             x.setMap(null);
         }
-        addMarkers(lineSelected.value);
+        addMarkers(lineSelected.value,typeSelected.value);
+    });
+
+    //add element in top left corner to choose what type of stations to display (ADA or non-ADA)
+    const typeControl = document.getElementById("type-selector-control");
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(typeControl);
+    const typeSelected = document.getElementById("type-selector");
+
+    typeSelected.addEventListener("change", () => {
+        while (markers.length > 0) {
+            const x = markers.pop();
+            x.setMap(null);
+        }
+        addMarkers(lineSelected.value,typeSelected.value);
     });
 
     //broken (should add transit but doesn't work with map style on)
@@ -36,12 +53,12 @@ async function initMap() {
     // transitLayer.setMap(map);
 
 
-    addMarkers("All");
+    addMarkers("All","All");
 
 }
 
 //adds markers to a map, include is used to filter based off option selected
-function addMarkers(include) {
+function addMarkers(includeLine,includeType) {
     for (let i = 0; i < names.length; i++) {
         //purple express lines should just be concidered purple
         if (colors[i] == "Purple-Express") {
@@ -49,7 +66,7 @@ function addMarkers(include) {
         }
 
         //depending on what line(s) the user selected only place those markers
-        if (include == "All" || include == colors[i]) {
+        if (( includeLine == "All" || includeLine == colors[i] ) && (includeType == "All" || parseInt(includeType) == ADAs[i])) {
             //Depending on stop color and if it's Accessible give correct png file
             const markerPNG = document.createElement("img");
             markerPNG.width = 28; markerPNG.height = 22;
@@ -62,11 +79,14 @@ function addMarkers(include) {
                 content: markerPNG
             });
 
-            markers.push(marker);
+            markers.push(marker); //add marker to list of markers on map
+
+            const infoWindowContent = '<div class="custom-info-window">  <h4>' + names[i] + '</h4> </div>';
 
             //pop up window that is displayed when Icon is pressed
             const infowindow = new google.maps.InfoWindow({
-                content: names[i],
+                headerContent: infoWindowContent,
+               
             });
 
             marker.addListener("click", () => {
