@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CTA_Database_Website.Pages
 {
-    public class SearchModel : PageModel
+    public class ResourcesModel : PageModel
     {
         public void OnGet()
         {

@@ -32,9 +32,9 @@
     </div>
     <!--The div element for the map -->
     <div id="map"></div>
-    <h4> Click on Icon for station Name </h4>
     <!-- prettier-ignore -->
     <script>
+        //retrieve info from database and send to map.js to put on map
         var lats = @Html.Raw(Json.Serialize(Model.CombinedTable.Select(p => p.lat)));
         var lons = @Html.Raw(Json.Serialize(Model.CombinedTable.Select(p => p.lon)));
         var names = @Html.Raw(Json.Serialize(Model.CombinedTable.Select(p => p.Station_Name)));

@@ -47,11 +47,6 @@ async function initMap() {
         addMarkers(lineSelected.value,typeSelected.value);
     });
 
-    //broken (should add transit but doesn't work with map style on)
-    //  const transitLayer = new google.maps.TransitLayer();
-
-    // transitLayer.setMap(map);
-
 
     addMarkers("All","All");
 
@@ -81,12 +76,11 @@ function addMarkers(includeLine,includeType) {
 
             markers.push(marker); //add marker to list of markers on map
 
-            const infoWindowContent = '<div class="custom-info-window">  <h4>' + names[i] + '</h4> </div>';
+            const infoWindowContent = `<div class="custom-info-window"><h4>${names[i]}</h4></div>`;
 
             //pop up window that is displayed when Icon is pressed
             const infowindow = new google.maps.InfoWindow({
-                headerContent: infoWindowContent,
-               
+                Content: infoWindowContent,
             });
 
             marker.addListener("click", () => {
