@@ -1,12 +1,14 @@
 // Initialize and add the map
 let map;
 
+let markers = [];
+
 async function initMap() {
     // Request needed libraries.
     const { Map, InfoWindow, TransferLayer } = await google.maps.importLibrary("maps");
-    const { AdvancedMarkerElement, pinElement } = await google.maps.importLibrary( "marker" );
+    const { AdvancedMarkerElement, pinElement } = await google.maps.importLibrary("marker");
 
-    const map = new google.maps.Map(document.getElementById("map"), {
+     map = new google.maps.Map(document.getElementById("map"), {
         zoom: 14,
         center: { lat: 41.8781, lng: -87.6298 }, //centered in chicago
         mapId: "1223296c9e0b184c", //adds style from style cloud
@@ -15,35 +17,62 @@ async function initMap() {
         minZoom: 10
     });
 
+    //add element in top left corner to choose what lines are displayed on the map
+    const lineControl = document.getElementById("line-selector-control");
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(lineControl);
+    const lineSelected = document.getElementById("line-selector");
+
+    lineSelected.addEventListener("change", () => {
+        while (markers.length > 0) {
+            const x = markers.pop();
+            x.setMap(null);
+        }
+        addMarkers(lineSelected.value);
+    });
+
     //broken (should add transit but doesn't work with map style on)
-  //  const transitLayer = new google.maps.TransitLayer();
+    //  const transitLayer = new google.maps.TransitLayer();
 
-   // transitLayer.setMap(map);
+    // transitLayer.setMap(map);
 
 
+    addMarkers("All");
 
-    for (let i = 0; i < names.length; i++) { 
- 
-        //Depending on stop color and if it's Accessible give correct png file
-        const markerPNG = document.createElement("img");
-        markerPNG.width = 26; markerPNG.height = 22;
-        markerPNG.src = determinePNG(colors[i], ADAs[i]);
+}
 
-        //create marker
-        const marker = new google.maps.marker.AdvancedMarkerElement({
-            map,
-            position: { lat: lats[i], lng: lons[i] },
-            content: markerPNG
-        });
+//adds markers to a map, include is used to filter based off option selected
+function addMarkers(include) {
+    for (let i = 0; i < names.length; i++) {
+        //purple express lines should just be concidered purple
+        if (colors[i] == "Purple-Express") {
+            colors[i] = "Purple";   
+        }
 
-        //pop up window that is displayed when Icon is pressed
-        const infowindow = new google.maps.InfoWindow({
-            content: names[i],
-        });
+        //depending on what line(s) the user selected only place those markers
+        if (include == "All" || include == colors[i]) {
+            //Depending on stop color and if it's Accessible give correct png file
+            const markerPNG = document.createElement("img");
+            markerPNG.width = 28; markerPNG.height = 22;
+            markerPNG.src = determinePNG(colors[i], ADAs[i]);
 
-        marker.addListener("click", () => {
-            infowindow.open(map, marker);
-        });
+            //create marker
+            const marker = new google.maps.marker.AdvancedMarkerElement({
+                map,
+                position: { lat: lats[i], lng: lons[i] },
+                content: markerPNG
+            });
+
+            markers.push(marker);
+
+            //pop up window that is displayed when Icon is pressed
+            const infowindow = new google.maps.InfoWindow({
+                content: names[i],
+            });
+
+            marker.addListener("click", () => {
+                infowindow.open(map, marker);
+            });
+        }
     }
 }
 
@@ -61,9 +90,6 @@ function determinePNG(color, isADA) {
         case "Purple":
             if (isADA) { return '/Images/Purple_Station_Dis.png' }
             return '/Images/Purple_Station.png'
-        case "Purple-Express":
-            if (isADA) { return '/Images/Purple_Station_Dis.png' }
-            return '/Images/Purple_Station.png'
         case "Pink":
             if (isADA) { return '/Images/Pink_Station_Dis.png' }
             return '/Images/Pink_Station.png'
@@ -77,7 +103,7 @@ function determinePNG(color, isADA) {
             if (isADA) { return '/Images/Brown_Station_Dis.png' }
             return '/Images/Brown_Station.png'
         default:
-             return ''
+            return ''
     }
 }
 
