@@ -8,5 +8,9 @@
         public string Station_Name { get; set; }
         public double lat { get; set; }
         public double lon { get; set; }
+
+        public int ADA {  get; set; }
+
+        public string color { get; set; }
     }
 }
