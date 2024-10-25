@@ -22,6 +22,7 @@ namespace CTA_Database_Website.Pages
         //fetch all stations from the database
         public async Task OnGetAsync()
         {
+            //this uses traditional sql
             CombinedTable = await (from station in _context.Stations
                                    join stop in _context.Stops
                                    on station.Station_ID equals stop.Station_ID
@@ -40,6 +41,21 @@ namespace CTA_Database_Website.Pages
                                    }
                                    ).ToListAsync();
                                    
+        }
+
+
+        //search database and return all stations whos name contains the search term
+        public async Task<IActionResult> OnGetSearch(string query)
+        {
+            if (string.IsNullOrEmpty(query))
+            {
+                return new JsonResult(new List<object>()); //return an empty list
+            }
+
+            //this is a c# sql query (can see similarities)
+            var results = await _context.Stations.Where(s => s.Station_Name.Contains(query)).ToListAsync();
+
+            return new JsonResult(results);
         }
     }
 }

@@ -65,6 +65,16 @@ p {
     border: 2px solid #0056b3;
 }
 
+.image-me {
+    display: block;
+    max-width: 60%;
+    height: auto;
+    margin: 15px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+    border: 2px solid #0056b3;
+}
+
 @media (max-width: 768px) {
     .content-container {
         padding: 15px;
@@ -116,4 +126,66 @@ footer{
     color: #666;
     font-style: italic;
     height: 40px;
+}
+
+/* Social Buttons Styling - overriding any inheritance */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    padding: 0; /* Override any padding inherited from container */
+}
+
+.social-button {
+    display: flex;
+    align-items: center;
+    background-color: #0073e6;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.4em;
+    transition: background-color 0.3s ease;
+    box-shadow: none; /* Remove box shadow if inherited */
+    border: none; /* Remove any borders inherited */
+    margin: 0; /* Override inherited margin */
+    line-height: normal; /* Reset line-height to normal */
+}
+
+    .social-button:hover {
+        background-color: #005bb5;
+    }
+
+.social-logo {
+    width: auto;
+    height: auto;
+    margin-right: 10px;
+}
+
+/* Ensure the social buttons don't inherit unwanted properties */
+.content-container .social-links,
+.content-container .social-button {
+    background-color: transparent; /* Ensure no background inherited */
+    box-shadow: none;
+}
+
+/* About Section - Image and Text Side by Side */
+.about-section {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between the image and the text */
+}
+
+.image-me {
+    width: 30%; /* Set a fixed width for the image */
+    height: auto; /* Maintain the aspect ratio */
+    border-radius: 20%; /* Optional: make the image round like a profile picture */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for aesthetics */
+    border-width: 4px;
+}
+
+.about-section p {
+    flex: 1; /* Allows the paragraph to take the remaining space next to the image */
+    font-size: 1.1em;
+    line-height: 1.6;
 }

@@ -7,10 +7,11 @@
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/map.css" />
 
-    <script src="~/js/map.js" type="module"></script>
+    <script  src="~/js/map.js" type="module"> </script>
 </head>
 
 <body>
+
     <div id="line-selector-control" class="map-control">
         <select id="line-selector" class="selector-control">
             <option value="All">All Lines</option>
@@ -23,6 +24,7 @@
             <option value="Brown">Brown Line</option>
         </select>
     </div>
+
     <div id="type-selector-control" class="map-control">
         <select id="type-selector" class="selector-control">
             <option value="All">Both</option>
@@ -30,9 +32,11 @@
             <option value="0">non-ADA</option>
         </select>
     </div>
-    <!--The div element for the map -->
+
+  
     <div id="map"></div>
-    <!-- prettier-ignore -->
+ 
+
     <script>
         //retrieve info from database and send to map.js to put on map
         var lats = @Html.Raw(Json.Serialize(Model.CombinedTable.Select(p => p.lat)));

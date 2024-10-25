@@ -3,8 +3,50 @@
 @{
     ViewData["Title"] = "About Page";
 }
-<h1>@ViewData["Title"]</h1>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/resources.css" />
+</head>
 
-<p>about page</p>
+<body>
+    <div class="content-container">
 
-<p> </p>
+        <h1>The Story Behind the Website:</h1>
+        <p>
+            This website was created as a personal project. It started when I utilized a CTA database in one of my university classes.
+            I wanted to expand on the original simple homework assignment in class. The database contained a column labeled whether a station was ADA-compliant.
+            Through research, I discovered that no publicly available map prominently displayed whether a station was accessible.
+            The maps online were often not interactive or cluttered with extra information, leaving accessibility as a tiny icon.
+            I decided to make a website that clearly shows all stations on a map and whether they were ADA-compliant.
+            Throughout this process, I’ve learned so much about accessibility in Chicago transit, and I hope this website helps spread awareness
+            of Chicago’s successes and failures with accessible transit.  While also allowing people with disabilities to easily check if a station is accessible.
+        </p>
+
+        <h1>Creator:</h1>
+
+        <div class="about-section">
+            <img class="image-me" src="~/Images/Me.JPG" alt="Photo of me">
+            <p>
+                Hi! My name is Sam Eimiller, and I’m a Computer Science major at the University of Illinois Chicago (UIC).
+                I mainly focus on building web applications using the .NET framework. Thank you for looking at my website, and I hope you have a great day!
+            </p>
+        </div>
+
+        <!-- Social Links Section -->
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/samuel-eimiller/" target="_blank" class="social-button">
+                <img src="https://img.shields.io/static/v1?message=LinkedIn&logo=linkedin&label=&color=0077B5&logoColor=white&labelColor=&style=for-the-badge"
+                     alt="GitHub Logo" class="social-logo">
+            </a>
+            <a href="https://www.instagram.com/sameimiller" target="_blank" class="social-button">
+                <img src="https://img.shields.io/static/v1?message=Instagram&logo=instagram&label=&color=E4405F&logoColor=white&labelColor=&style=for-the-badge"
+                     alt="LinkedIn Logo" class="social-logo">
+            </a>
+            <a href="https://github.com/Sclubby" target="_blank" class="social-button">
+                <img src="https://img.shields.io/static/v1?message=Github&logo=GitHub&label=&color=000000&logoColor=white&labelColor=&style=for-the-badge"
+                     alt="Github Logo" class="social-logo">
+            </a>
+        </div>
+
+    </div>
+</body>
+

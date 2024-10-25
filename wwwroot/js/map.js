@@ -40,10 +40,7 @@ async function initMap() {
     const typeSelected = document.getElementById("type-selector");
 
     typeSelected.addEventListener("change", () => {
-        while (markers.length > 0) {
-            const x = markers.pop();
-            x.setMap(null);
-        }
+        clearMarkers();
         addMarkers(lineSelected.value,typeSelected.value);
     });
 
@@ -51,6 +48,13 @@ async function initMap() {
     addMarkers("All","All");
 
 }
+
+function clearMarkers() {
+    while (markers.length > 0) {
+        const x = markers.pop();
+        x.setMap(null);
+    }
+};
 
 //adds markers to a map, include is used to filter based off option selected
 function addMarkers(includeLine,includeType) {
@@ -90,6 +94,8 @@ function addMarkers(includeLine,includeType) {
     }
 }
 
+
+//determines what png should be used for a given marker
 function determinePNG(color, isADA) {
     switch (color) {
         case "Blue":
