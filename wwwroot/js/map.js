@@ -126,5 +126,4 @@ function determinePNG(color, isADA) {
             return ''
     }
 }
-
 initMap();
