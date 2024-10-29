@@ -1,3 +1,7 @@
+## Video Overview:
+
+<a href="https://www.linkedin.com/feed/update/urn:li:activity:7257138300145041409/">[Video]</a>
+
 ## Website Preview:
 
 <p> 
